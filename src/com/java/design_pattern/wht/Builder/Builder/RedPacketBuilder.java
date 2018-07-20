@@ -37,7 +37,10 @@ public class RedPacketBuilder implements Buider {
 
     @Override
     public Buider setPacketAmount(BigDecimal packetAmount) {
-        this.packetAmount = packetAmount;
+        if (packetAmount != null){
+            this.packetAmount = packetAmount;
+        }
+        this.packetAmount = new BigDecimal(0.00);
         return this;
     }
 
