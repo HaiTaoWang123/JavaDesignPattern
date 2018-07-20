@@ -1,5 +1,7 @@
 package com.java.design_pattern.wht.Builder.RedPacket;
 
+import com.java.design_pattern.wht.Builder.Builder.RedPacketBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -50,7 +52,15 @@ public class RedPacket {
         return openPacketTime;
     }
 
-    static class RedPacketBuilder{
+//    public static RedPacketBuilder getRedPacketBuilder(){
+//        return new RedPacketBuilder();
+//    }
+
+    public static RedPacketInnerBuilder getRedPacketInnerBuilder(){
+        return new RedPacketInnerBuilder();
+    }
+
+    public static class RedPacketInnerBuilder {
         private String publisherName;//红包发出人姓名
         private String acceptName;//红包接收人姓名
         private BigDecimal packetAmount;//红包金额
@@ -58,38 +68,45 @@ public class RedPacket {
         private Date publishTime;//红包发出时间
         private Date openPacketTime;//抢包时间
 
-        public RedPacketBuilder setPublisherName(String publisherName) {
+        public RedPacketInnerBuilder setPublisherName(String publisherName) {
             this.publisherName = publisherName;
             return this;
         }
 
-        public RedPacketBuilder setAcceptName(String acceptName) {
+        public RedPacketInnerBuilder setAcceptName(String acceptName) {
             this.acceptName = acceptName;
             return this;
         }
 
-        public RedPacketBuilder setPacketAmount(BigDecimal packetAmount) {
+        public RedPacketInnerBuilder setPacketAmount(BigDecimal packetAmount) {
             this.packetAmount = packetAmount;
             return this;
         }
 
-        public RedPacketBuilder setPacketType(int packetType) {
+        public RedPacketInnerBuilder setPacketType(int packetType) {
             this.packetType = packetType;
             return this;
         }
 
-        public RedPacketBuilder setPublishTime(Date publishTime) {
+        public RedPacketInnerBuilder setPublishTime(Date publishTime) {
             this.publishTime = publishTime;
             return this;
         }
 
-        public RedPacketBuilder setOpenPacketTime(Date openPacketTime){
+        public RedPacketInnerBuilder setOpenPacketTime(Date openPacketTime){
             this.openPacketTime = openPacketTime;
             return this;
         }
 
-        public RedPacket redPacketBuilder(){
+        public RedPacket redPacketInnerBuilder(){
             return new RedPacket(publisherName,acceptName,packetAmount,packetType,publishTime,openPacketTime);
         }
+    }
+
+    @Override
+    public String toString() {
+        return publishTime+":"+publisherName +"给"+acceptName+"发了"+packetAmount+"元的红包"+
+                "\n"+
+               openPacketTime+ ":"+acceptName+"打开了红包，收到红包的她非常高兴，深情地亲吻了一下"+publisherName;
     }
 }
